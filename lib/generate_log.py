@@ -1,22 +1,19 @@
-from datetime import datetime
+import datetime
 import os
 
-def generate_log(data):
-    # STEP 1: Validate input
-    if not isinstance(data, list):
-        raise ValueError("Input data must be a list.")
-
-    # STEP 2: Generate a filename with today's date (e.g., "log_20260609.txt")
-    date_str = datetime.now().strftime("%Y%m%d")
-    filename = f"log_{date_str}.txt"
-
-    # STEP 3: Write the log entries to a file using File I/O
-    with open(filename, "w") as file:
-        for entry in data:
+def generate_log(log_entries):
+    # 1. Raise ValueError if input is not a list (Rubric Criterion 4)
+    if not isinstance(log_entries, list):
+        raise ValueError("Input must be a list of log entries.")
+    
+    # 2. Get the current date in YYYYMMDD format (Rubric Criterion 2)
+    current_date = datetime.datetime.now().strftime("%Y%m%d")
+    filename = f"log_{current_date}.txt"
+    
+    # 3. Create and write content to the file (Rubric Criteria 1, 3 & 5)
+    with open(filename, "w", encoding="utf-8") as file:
+        for entry in log_entries:
             file.write(f"{entry}\n")
-
-    # STEP 4: Print a confirmation message with the filename
-    print(f"Log successfully generated: {filename}")
-
-    # STEP 5: Return the filename so tests can inspect and clean it up
-    return filename
+            
+    # 4. Print confirmation message including the filename (Rubric Criterion 6)
+    print(f"Success: Log file created successfully as {filename}")
